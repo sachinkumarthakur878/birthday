@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 900" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="85" y1="38" x2="650" y2="880" gradientUnits="userSpaceOnUse"><stop stop-color="#342d4a"/><stop offset=".53" stop-color="#211d35"/><stop offset="1" stop-color="#151321"/></linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientTransform="matrix(0 410 -365 0 370 380)" gradientUnits="userSpaceOnUse"><stop stop-color="#c18b83" stop-opacity=".32"/><stop offset="1" stop-color="#c18b83" stop-opacity="0"/></radialGradient>
+  </defs>
+  <path fill="url(#bg)" d="M0 0h740v900H0z"/><path fill="url(#glow)" d="M0 0h740v900H0z"/>
+  <circle cx="370" cy="335" r="170" stroke="#e0bd8a" stroke-opacity=".19"/>
+  <circle cx="370" cy="335" r="204" stroke="#e0bd8a" stroke-opacity=".1"/>
+  <path d="M367 242v153m-76-76h152" stroke="#f0d5a9" stroke-opacity=".8" stroke-width="1.5"/>
+  <circle cx="367" cy="319" r="28" fill="#f0d5a9" fill-opacity=".09"/>
+  <path d="M200 615h340M238 650h264" stroke="#f0d5a9" stroke-opacity=".17"/>
+  <text x="370" y="716" fill="#f0d5a9" fill-opacity=".8" font-family="Georgia,serif" font-size="22" letter-spacing="5" text-anchor="middle">YOUR PHOTO</text>
+  <text x="370" y="754" fill="#f0d5a9" fill-opacity=".5" font-family="Arial,sans-serif" font-size="11" letter-spacing="3" text-anchor="middle">GOES HERE</text>
+  <circle cx="115" cy="175" r="2" fill="#f4dcba"/><circle cx="612" cy="242" r="2" fill="#f4dcba"/><circle cx="573" cy="534" r="1.5" fill="#f4dcba"/><circle cx="153" cy="537" r="1.5" fill="#f4dcba"/>
+</svg>
