@@ -31,9 +31,6 @@ jobs:
       - name: Check lint
         run: npm run lint
 
-      - name: Configure GitHub Pages
-        uses: actions/configure-pages@v5
-
       - name: Build static site
         run: npm run build
 
@@ -52,6 +49,9 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
