@@ -19,6 +19,12 @@ import { useRef, useState } from "react";
 import { birthdayConfig } from "@/lib/birthday-config";
 
 const scenes = ["A little surprise", "The big day", "A note for you", "Little memories", "One more thing"];
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
+function publicAsset(src: string) {
+  if (/^(?:[a-z][a-z\d+.-]*:|\/\/)/i.test(src)) return src;
+  return `${basePath}${src.startsWith("/") ? src : `/${src}`}`;
+}
 
 export default function Home() {
   const [scene, setScene] = useState(0);
@@ -139,7 +145,7 @@ function BirthdayScene({ name, firstName, celebrated, onCelebrate, onNext }: { n
     </div>
     <div className={`portrait-wrap ${celebrated ? "portrait-celebrated" : ""}`}>
       <div className="portrait-orbit" aria-hidden="true" /><div className="portrait-frame">
-        {!photoFailed ? <Image src={birthdayConfig.recipientPhoto} alt={`A photo of ${name}`} fill priority sizes="(max-width: 700px) 78vw, 370px" className="portrait-image" onError={() => setPhotoFailed(true)} /> : <div className="photo-placeholder"><div className="placeholder-symbol"><Sparkles size={26} /></div><span>YOUR PHOTO<br />GOES HERE</span><small>Replace recipientPhoto in<br />lib/birthday-config.ts</small></div>}
+        {!photoFailed ? <Image src={publicAsset(birthdayConfig.recipientPhoto)} alt={`A photo of ${name}`} fill priority sizes="(max-width: 700px) 78vw, 370px" className="portrait-image" onError={() => setPhotoFailed(true)} /> : <div className="photo-placeholder"><div className="placeholder-symbol"><Sparkles size={26} /></div><span>YOUR PHOTO<br />GOES HERE</span><small>Replace recipientPhoto in<br />lib/birthday-config.ts</small></div>}
         <div className="portrait-vignette" />
       </div>
       <div className="portrait-caption"><span>THE WORLD IS LUCKIER WITH YOU IN IT</span><Heart size={12} fill="currentColor" /></div>
@@ -182,7 +188,7 @@ function MemoriesScene({ name, onNext }: { name: string; onNext: () => void }) {
     <div className="eyebrow"><span className="eyebrow-line" /> THE LITTLE THINGS STAY WITH US <span className="eyebrow-line" /></div>
     <p className="small-kicker">A PLACE FOR THE MOMENTS THAT MAKE YOU, YOU</p>
     <h1 className="memories-title">A life full of<br /><em>lovely little things.</em></h1>
-    {photos.length > 1 ? <div className="memory-gallery">{photos.map((src, index) => <div className={`memory-tile tile-${index % 3}`} key={`${src}-${index}`}><div className="memory-image">{!failedPhotos.includes(src) ? <Image src={src} alt={`${name}, memory ${index + 1}`} fill sizes="(max-width: 700px) 85vw, 32vw" onError={() => markFailed(src)} /> : <PhotoFallback name={name} />}</div><span className="memory-caption">A MOMENT TO KEEP <span>0{index + 1}</span></span></div>)}</div> : <div className="single-memory"><div className="single-memory-frame"><div className="memory-image">{!failedPhotos.includes(photos[0]) ? <Image src={photos[0]} alt={`A photo of ${name}`} fill sizes="(max-width: 700px) 86vw, 440px" onError={() => markFailed(photos[0])} /> : <PhotoFallback name={name} />}</div></div><div className="single-memory-note"><span className="memory-note-star">✳</span><span>THE BEST MEMORIES AREN&apos;T ALWAYS IN PHOTOS.<br />SOME LIVE IN THE WAY YOU MAKE PEOPLE FEEL.</span></div></div>}
+    {photos.length > 1 ? <div className="memory-gallery">{photos.map((src, index) => <div className={`memory-tile tile-${index % 3}`} key={`${src}-${index}`}><div className="memory-image">{!failedPhotos.includes(src) ? <Image src={publicAsset(src)} alt={`${name}, memory ${index + 1}`} fill sizes="(max-width: 700px) 85vw, 32vw" onError={() => markFailed(src)} /> : <PhotoFallback name={name} />}</div><span className="memory-caption">A MOMENT TO KEEP <span>0{index + 1}</span></span></div>)}</div> : <div className="single-memory"><div className="single-memory-frame"><div className="memory-image">{!failedPhotos.includes(photos[0]) ? <Image src={publicAsset(photos[0])} alt={`A photo of ${name}`} fill sizes="(max-width: 700px) 86vw, 440px" onError={() => markFailed(photos[0])} /> : <PhotoFallback name={name} />}</div></div><div className="single-memory-note"><span className="memory-note-star">✳</span><span>THE BEST MEMORIES AREN&apos;T ALWAYS IN PHOTOS.<br />SOME LIVE IN THE WAY YOU MAKE PEOPLE FEEL.</span></div></div>}
     <motion.button className="primary-button" onClick={onNext} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}><span>One last little thing</span><ArrowRight size={17} /></motion.button>
   </div>;
 }
